@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusTap — Offline-First Campus Payments</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@700&display=swap');
+
+:root{
+  --purple:#4a2fc0;
+  --deep:#24145e;
+  --deep2:#1e1254;
+  --ink:#241b4b;
+  --muted:#635b8d;
+  --lav:#f6f4fc;
+  --line:#ddd7f0;
+  --orange:#ffab20;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--lav);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}
+.slide{min-height:100vh;padding:clamp(28px,5vw,64px) clamp(22px,6vw,72px);display:flex;align-items:center}
+.inner{width:min(1120px,100%);margin:auto}
+.eyebrow{font-size:12px;letter-spacing:4px;font-weight:700;color:#f49b00;text-transform:uppercase;margin-bottom:18px}
+h1,h2,h3{font-family:"Libre Baskerville",Georgia,serif;margin:0}
+h2{font-size:clamp(34px,5vw,54px);line-height:1.08;color:var(--purple)}
+p{color:var(--muted);line-height:1.45;margin:0}
+.hero,.final{background:var(--deep2);color:white}
+.hero .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(52px,8vw,84px);line-height:1;color:#fff;margin-bottom:22px}
+.hero .subtitle{font-size:clamp(21px,3vw,30px);color:#d4ccef;margin-bottom:22px}
+.hero .desc{max-width:570px;font-size:17px;color:#c6bedf}
+.badge{font-size:13px;letter-spacing:4px;color:var(--orange);font-weight:700}
+.hero-art{height:430px;display:grid;place-items:center}
+.id-orbit{width:min(390px,75vw);aspect-ratio:1;border-radius:50%;background:#332180;display:grid;place-items:center}
+.id-orbit:before{content:"";width:68%;aspect-ratio:1;border-radius:50%;background:#4e30c6;position:absolute}
+.id-card{position:relative;width:150px;height:105px;background:#fff;border-radius:13px;box-shadow:0 15px 30px #170b46aa}
+.id-card:before{content:"";position:absolute;left:0;right:0;top:17px;height:9px;background:#fff}
+.id-card .head{position:absolute;width:30px;height:30px;border-radius:50%;background:#4e30c6;left:27px;top:38px}
+.id-card .body{position:absolute;width:53px;height:20px;border-radius:20px 20px 8px 8px;background:#4e30c6;left:16px;bottom:14px}
+.id-card i{position:absolute;right:16px;width:38px;height:7px;border-radius:4px;background:#4e30c6}
+.id-card i:nth-of-type(1){top:40px}.id-card i:nth-of-type(2){top:54px}.id-card i:nth-of-type(3){top:68px}
+
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
+.cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:26px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:25px;box-shadow:0 7px 18px #33208018}
+.icon{width:60px;height:60px;border-radius:50%;background:var(--purple);display:grid;place-items:center;margin-bottom:20px;flex:none}
+.icon.orange{background:var(--orange)}
+.icon img{width:32px;height:32px;object-fit:contain;filter:none}
+.card h3{font-size:17px;line-height:1.35;margin-bottom:16px}
+.card p{font-size:14px}
+.feature{display:flex;gap:22px;align-items:flex-start}
+.feature .icon{margin:0}
+.feature h3{margin-top:1px;margin-bottom:10px}
+.feature p{font-size:13px}
+.stack{display:grid;gap:14px;margin-top:30px}
+.stack .card{display:grid;grid-template-columns:58px 240px 1fr;gap:18px;align-items:center;padding:12px 18px}
+.stack .icon{margin:0}
+.stack h3{font-size:16px}
+.arch{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;margin-top:28px}
+.arch-img{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;box-shadow:0 7px 18px #33208018}
+.arch-img img{width:100%;display:block;border-radius:7px}
+.steps{display:grid;gap:20px}
+.step{display:grid;grid-template-columns:42px 1fr;gap:16px;align-items:start}
+.num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:#fff;font-weight:700}
+.step:nth-child(even) .num{background:var(--orange);color:var(--deep)}
+.step h3{font-size:16px;margin-bottom:5px}
+.step p{font-size:13px}
+.final h2{color:#fff}
+.final .lead{font-size:19px;color:#d4ccef;margin:24px 0 48px}
+.final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.final-card{background:#30217d;border:1px solid #4c3aa0;border-radius:10px;padding:20px}
+.final-card .icon{margin:0 0 16px}
+.final-card h3{color:#fff;font-size:16px;margin-bottom:5px}
+.final-card p{color:#d4ccef;font-size:13px}
+.dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:10}
+.dots a{width:9px;height:9px;border-radius:50%;background:#b9b0dc;border:2px solid #fff;box-shadow:0 1px 5px #0002}
+@media(max-width:800px){
+ .hero .inner,.arch{grid-template-columns:1fr}
+ .hero-art{height:300px;order:-1}
+ .cards3,.final-grid{grid-template-columns:1fr}
+ .cards2{grid-template-columns:1fr}
+ .stack .card{grid-template-columns:58px 1fr}
+ .stack .card p{grid-column:2}
+ .dots{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="dots" aria-label="Slides">
+<a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a><a href="#s5"></a><a href="#s6"></a><a href="#s7"></a>
+</nav>
+
+<section class="slide hero" id="s1">
+<div class="inner">
+  <div>
+    <div class="badge">HACK SUMMIT 7.0 &nbsp; | &nbsp; FINTECH</div>
+    <h1>CampusTap</h1>
+    <div class="subtitle">Offline-First Campus Payments</div>
+    <p class="desc">NFC &amp; barcode ID payments with smart pre-ordering, so students spend breaks, not time in queues.</p>
+  </div>
+  <div class="hero-art"><div class="id-orbit"><div class="id-card"><span class="head"></span><span class="body"></span><i></i><i></i><i></i></div></div></div>
+</div>
+</section>
+
+<section class="slide" id="s2"><div class="inner">
+<div class="eyebrow">PROBLEM STATEMENT</div><h2>Campus life runs on waiting</h2>
+<div class="cards3">
+ <article class="card"><div class="icon"><img src="image-2-1.png"></div><h3>Long service queues</h3><p>Students waste 20 to 30 minutes of a short break standing in lines at the canteen, photocopy shops and stationery stalls.</p></article>
+ <article class="card"><div class="icon"><img src="image-2-2.png"></div><h3>Connectivity dead zones</h3><p>Basements, thick-walled lecture halls, auditoriums and hostel corners have poor signal, so online payment apps fail when students need them most.</p></article>
+ <article class="card"><div class="icon"><img src="image-2-3.png"></div><h3>Cash and change friction</h3><p>Carrying cash and dealing with loose change slows every transaction and causes accounting friction for campus vendors.</p></article>
+</div></div></section>
+
+<section class="slide" id="s3"><div class="inner">
+<div class="eyebrow">PROPOSED SOLUTION</div><h2>Tap. Pay. Pick up.</h2>
+<div class="cards2">
+ <article class="card feature"><div class="icon"><img src="image-3-1.png"></div><div><h3>Offline NFC / barcode ID payments</h3><p>ID cards carry an NFC chip or dynamic barcode with a cryptographically signed token. No cellular data or Wi-Fi needed on the student's phone.</p></div></article>
+ <article class="card feature"><div class="icon orange"><img src="image-3-2.png"></div><div><h3>Smart in-app pre-ordering</h3><p>Order food, snacks or printouts from anywhere on campus, quick-commerce style, and pick up the moment they are ready.</p></div></article>
+ <article class="card feature"><div class="icon"><img src="image-3-3.png"></div><div><h3>Wallet top-ups via UPI</h3><p>Parents or students reload the digital campus wallet anytime through the college web portal or app.</p></div></article>
+ <article class="card feature"><div class="icon orange"><img src="image-3-4.png"></div><div><h3>Transparent multi-user tracking</h3><p>Students &amp; parents get live spending history and budget oversight. College management gets ledger audits and vendor analytics.</p></div></article>
+</div></div></section>
+
+<section class="slide" id="s4"><div class="inner">
+<div class="eyebrow">TECHNICAL APPROACH</div><h2>A simple, proven stack</h2>
+<div class="stack">
+ <article class="card"><div class="icon"><img src="image-4-1.png"></div><h3>Student Interface</h3><p>PWA or mobile app in React / Flutter to check wallet balance, order status and transaction history.</p></article>
+ <article class="card"><div class="icon"><img src="image-4-2.png"></div><h3>Merchant POS Terminal</h3><p>Web-based or lightweight app at shop counters on shop Wi-Fi, with NFC readers and barcode scanners.</p></article>
+ <article class="card"><div class="icon"><img src="image-4-3.png"></div><h3>Security &amp; Encryption</h3><p>Time-sensitive encrypted hashes (signed tokens) on ID cards prevent cloning, duplication and tampering.</p></article>
+ <article class="card"><div class="icon"><img src="image-4-4.png"></div><h3>Backend &amp; Database</h3><p>Node.js / Express or Python server with MongoDB / PostgreSQL for accounts, real-time ledger and UPI callbacks.</p></article>
+</div></div></section>
+
+<section class="slide" id="s5"><div class="inner">
+<div class="eyebrow">ARCHITECTURE DIAGRAM</div><h2>Hybrid offline / online</h2>
+<div class="arch">
+ <div class="arch-img"><img src="image-5-1.png" alt="Hybrid offline/online architecture diagram"></div>
+ <div class="steps">
+  <div class="step"><div class="num">1</div><div><h3>Offline tap / scan</h3><p>Student ID is tapped or scanned at the merchant POS.</p></div></div>
+  <div class="step"><div class="num">2</div><div><h3>POS verification</h3><p>Shop internet verifies identity, checks balance and logs the transaction.</p></div></div>
+  <div class="step"><div class="num">3</div><div><h3>Central server &amp; cloud DB</h3><p>Syncs the student wallet, vendor kitchen screen and admin analytics.</p></div></div>
+  <div class="step"><div class="num">4</div><div><h3>UPI gateway</h3><p>Used only for wallet recharge, when internet is available.</p></div></div>
+ </div>
+</div></div></section>
+
+<section class="slide" id="s6"><div class="inner">
+<div class="eyebrow">FEASIBILITY AND SCALABILITY</div><h2>Cheap to deploy, easy to grow</h2>
+<div class="cards2">
+ <article class="card"><div class="feature"><div class="icon"><img src="image-6-1.png"></div><div><h3>Technical &amp; economic feasibility</h3><p>Off-the-shelf NFC readers and standard web/cloud stacks keep hardware deployment costs minimal for institutions.<br><br>Reuses existing student ID card infrastructure with minor upgrades: NFC tags or printed dynamic barcodes.</p></div></div></article>
+ <article class="card"><div class="feature"><div class="icon orange"><img src="image-6-2.png"></div><div><h3>Scalability potential</h3><p>Expands beyond canteens into one unified micro-payment standard for the whole campus:</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px"><span style="background:#eeeafd;border:1px solid #ded7f4;border-radius:20px;padding:9px;text-align:center;font-size:12px;color:#4a2fc0">Stationery stores</span><span style="background:#eeeafd;border:1px solid #ded7f4;border-radius:20px;padding:9px;text-align:center;font-size:12px;color:#4a2fc0">Library fine desks</span><span style="background:#eeeafd;border:1px solid #ded7f4;border-radius:20px;padding:9px;text-align:center;font-size:12px;color:#4a2fc0">Hostel vending</span><span style="background:#eeeafd;border:1px solid #ded7f4;border-radius:20px;padding:9px;text-align:center;font-size:12px;color:#4a2fc0">Photocopy kiosks</span><span style="background:#eeeafd;border:1px solid #ded7f4;border-radius:20px;padding:9px;text-align:center;font-size:12px;color:#4a2fc0">Inter-campus transport</span><span style="background:#eeeafd;border:1px solid #ded7f4;border-radius:20px;padding:9px;text-align:center;font-size:12px;color:#4a2fc0">Canteens</span></div></div></div></article>
+</div></div></section>
+
+<section class="slide final" id="s7"><div class="inner">
+<h2>Tap. Pay. Pick up.</h2>
+<p class="lead">CampusTap turns every campus counter into a fast, offline-ready checkout.</p>
+<div class="final-grid">
+ <article class="final-card"><div class="icon orange"><img src="image-7-1.png"></div><h3>Offline-first</h3><p>Pays anywhere on campus, even in dead zones</p></article>
+ <article class="final-card"><div class="icon orange"><img src="image-7-2.png"></div><h3>Zero waiting</h3><p>Pre-order and pick up when ready</p></article>
+ <article class="final-card"><div class="icon orange"><img src="image-7-3.png"></div><h3>Full transparency</h3><p>Live tracking for students, parents and college</p></article>
+</div></div></section>
+
+</body>
+</html>
